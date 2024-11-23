@@ -1,0 +1,28 @@
+import logging
+import os
+from loguru import logger
+
+def setup_logger(log_file_path="logs/registration.log"):
+    """Sets up the logger to write to the specified log file."""
+    log_dir = os.path.dirname(log_file_path)
+    os.makedirs(log_dir, exist_ok=True)
+    logger.remove()  # Remove default handlers
+    logger.add(log_file_path, level="DEBUG", rotation="10 MB", retention="7 days", format="{time} - {level} - {message}")
+
+
+def log_registration_attempt(username, email, proxy, success, error_message=None, details=None):
+    """Logs a registration attempt with all relevant information."""
+    log_message = f"Username: {username}, Email: {email}, Proxy: {proxy}, Success: {success}"
+    if error_message:
+        log_message += f", Error: {error_message}"
+    if details:
+      log_message += f", Details: {details}"
+    
+    if success:
+        logger.success(log_message)
+    else:
+        logger.error(log_message)
+
+setup_logger()
+
+```
