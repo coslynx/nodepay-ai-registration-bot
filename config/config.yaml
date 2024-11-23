@@ -1,0 +1,6 @@
+email_provider: tempmail
+tempmail_api_url: https://api.temp-mail.org
+proxies_filepath: data/proxies.txt
+accounts_filepath: data/accounts.txt
+password_length: 12
+```
